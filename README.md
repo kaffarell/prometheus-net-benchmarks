@@ -1,4 +1,6 @@
 # prometheus-net benchmarks
+## Comparison
+![results](https://github.com/kaffarell/prometheus-net-benchmarks/blob/master/img/graph.png?raw=true)
 
 ## Clean webapi
 ![clean webapi results](https://github.com/kaffarell/prometheus-net-benchmarks/blob/master/img/clean.png?raw=true)
