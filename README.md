@@ -1,5 +1,12 @@
 # prometheus-net benchmarks
 
+## Clean webapi
+![clean webapi results](https://github.com/kaffarell/prometheus-net-benchmarks/blob/master/img/clean.png?raw=true)
+
+
+## Webapi with prometheus middleware
+![prometheus webapi results](https://github.com/kaffarell/prometheus-net-benchmarks/blob/master/img/prometheus.png?raw=true)
+
 ## Quickstart
 
 * Install k6 with winget: `winget install k6`
