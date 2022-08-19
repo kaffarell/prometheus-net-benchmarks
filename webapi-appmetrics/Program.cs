@@ -1,41 +1,40 @@
+using App.Metrics;
 using App.Metrics.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using System.Runtime.InteropServices;
+using App.Metrics.Formatters.Prometheus;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.UseMetricsWebTracking()
-.UseMetrics(option =>
-      {
-          option.EndpointOptions = endpointOptions =>
-          {
-              endpointOptions.MetricsTextEndpointOutputFormatter = new MetricsPrometheusTextOutputFormatter();
-              endpointOptions.MetricsEndpointOutputFormatter = new MetricsPrometheusProtobufOutputFormatter();
-              endpointOptions.EnvironmentInfoEndpointEnabled = false;
-          };
-      });
-
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+namespace webapi_appmetrics
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
+        public static IMetricsRoot? Metrics { get; set; }
+
+
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            Metrics = AppMetrics.CreateDefaultBuilder()
+                .OutputMetrics.AsPrometheusPlainText()
+                .OutputMetrics.AsPrometheusProtobuf()
+                .Build();
+
+            return Host.CreateDefaultBuilder(args)
+                .UseMetrics(
+                    options =>
+                    {
+                        options.EndpointOptions = endpointsOptions =>
+                        {
+                            endpointsOptions.MetricsTextEndpointOutputFormatter = Metrics.OutputMetricsFormatters.OfType<MetricsPrometheusTextOutputFormatter>().First();
+                            endpointsOptions.MetricsEndpointOutputFormatter = Metrics.OutputMetricsFormatters.OfType<MetricsPrometheusProtobufOutputFormatter>().First();
+                        };
+                    })
+                .UseMetricsWebTracking()
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+        }
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
