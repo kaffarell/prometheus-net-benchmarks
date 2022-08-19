@@ -23,7 +23,8 @@ http_reqs......................: 29700  98.663947/s
 iteration_duration.............: avg=1.01s   min=1s     med=1.01s  max=1.05s   p(90)=1.01s   p(95)=1.01s
 iterations.....................: 29700  98.663947/s
 vus............................: 100    min=100     max=100
-vus_max........................: 100    min=100     max=100```
+vus_max........................: 100    min=100     max=100
+```
 
 ## Webapi with prometheus-net middleware
 ![prometheus webapi results](https://github.com/kaffarell/prometheus-net-benchmarks/blob/master/img/prometheus.png?raw=true)
