@@ -1,6 +1,6 @@
 # prometheus-net benchmarks
 ## Comparison
-![results](https://github.com/kaffarell/prometheus-net-benchmarks/blob/master/img/graph.png?raw=true)
+![results](https://github.com/kaffarell/prometheus-net-benchmarks/blob/master/img/chart.png?raw=true)
 
 
 
