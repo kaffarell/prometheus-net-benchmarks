@@ -15,5 +15,6 @@ scrape_configs:
     static_configs:
       - targets: ["webapi-with-prometheus:80"]
   - job_name: "appmetrics"
+    metrics_path: /metrics-text
     static_configs:
       - targets: ["webapi-appmetrics:80"]

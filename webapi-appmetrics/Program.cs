@@ -1,6 +1,22 @@
+using App.Metrics.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using System.Runtime.InteropServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.UseMetricsWebTracking()
+.UseMetrics(option =>
+      {
+          option.EndpointOptions = endpointOptions =>
+          {
+              endpointOptions.MetricsTextEndpointOutputFormatter = new MetricsPrometheusTextOutputFormatter();
+              endpointOptions.MetricsEndpointOutputFormatter = new MetricsPrometheusProtobufOutputFormatter();
+              endpointOptions.EnvironmentInfoEndpointEnabled = false;
+          };
+      });
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
