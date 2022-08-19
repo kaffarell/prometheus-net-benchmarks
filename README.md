@@ -1,4 +1,4 @@
-# prometheus-net benchmarks
+# Metrics in dotnet benchmarks
 ## Comparison
 ![results](https://github.com/kaffarell/prometheus-net-benchmarks/blob/master/img/chart.png?raw=true)
 
