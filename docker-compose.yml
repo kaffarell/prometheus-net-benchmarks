@@ -20,6 +20,15 @@ services:
     ports:
       - 5001:80
 
+  webapi-with-appmetrics:
+    container_name: webapi-appmetrics
+    build:
+      context: ./webapi-appmetrics
+    networks:
+      - defaultnetwork
+    ports:
+      - 5002:80
+
   prometheus:
     container_name: prometheus
     image: prom/prometheus:v2.38.0
