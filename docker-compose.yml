@@ -4,8 +4,7 @@ services:
   webapi:
     container_name: webapi
     build:
-      context: .
-      dockerfile: ./webapi/Dockerfile
+      context: ./webapi
     networks:
       - defaultnetwork
     ports:
@@ -15,12 +14,11 @@ services:
   webapi-with-prometheus:
     container_name: webapi-with-prometheus
     build:
-      context: .
-      dockerfile: ./webapi-with-prometheus/Dockerfile
+      context: ./webapi-with-prometheus
     networks:
       - defaultnetwork
     ports:
-      - 5002:80
+      - 5001:80
 
   prometheus:
     container_name: prometheus

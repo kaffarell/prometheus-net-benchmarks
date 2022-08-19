@@ -1,3 +1,5 @@
+using Prometheus;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,6 +22,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseMetricServer();
+app.UseHttpMetrics();
 app.MapControllers();
 
 app.Run();
